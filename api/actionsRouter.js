@@ -174,6 +174,11 @@ function validateAction(req, res, next) {
       !Object.keys(body).includes('completed')
     ) {
       return res.status(400).json({ message: 'Invalid data within body.' });
+    } else if (
+      Objects.keys(body).length > 4 &&
+      Object.keys(body).includes('completed')
+    ) {
+      return res.status(400).json({ message: 'Invalid data within body.' });
     } else {
       next();
     }

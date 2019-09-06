@@ -150,6 +150,11 @@ function validateProject(req, res, next) {
       !Object.keys(body).includes('completed')
     ) {
       return res.status(400).json({ message: 'Invalid data within body.' });
+    } else if (
+      Object.keys(body).length > 3 &&
+      Object.keys(body).includes('completed')
+    ) {
+      return res.status(400).json({ message: 'Invalid data within body.' });
     } else {
       next();
     }
