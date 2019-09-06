@@ -6,6 +6,27 @@ const Projects = require('../data/helpers/projectModel.js');
 
 router.use(express.json());
 
+// GET /api/projects/
+// get()
+router.get('/', (req, res) => {
+  Projects.get()
+    .then(projects => {
+      if (projects.length === 0) {
+        res
+          .status(200)
+          .json({ message: 'There are no projects yet!', projects: projects });
+      } else {
+        res.status(200).json(projects);
+      }
+    })
+    .catch(err => {
+      console.log('Getting all projects', err);
+      res
+        .status(500)
+        .json({ error: 'Error occurred while getting all projects.' });
+    });
+});
+
 // GET /api/projects/:id
 // get(id)
 router.get('/:id', validateProjectId, (req, res) => {
@@ -81,12 +102,10 @@ router.delete('/:id', validateProjectId, (req, res) => {
 
   Projects.remove(id)
     .then(removedProject => {
-      res
-        .status(200)
-        .json({
-          message: `Deleted project with id ${id}`,
-          deletedProject: req.project,
-        });
+      res.status(200).json({
+        message: `Deleted project with id ${id}`,
+        deletedProject: req.project,
+      });
     })
     .catch(err => {
       console.log('Deleting project', err);

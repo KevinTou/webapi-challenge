@@ -9,6 +9,27 @@ router.use(express.json());
 
 // GET /api/projects/:project_id/actions/:id
 // get(id)
+router.get('/:project_id/actions/', validateProjectId, (req, res) => {
+  Actions.get()
+    .then(actions => {
+      if (actions.length === 0) {
+        res
+          .status(200)
+          .json({ message: 'There are no actions yet!', actions: actions });
+      } else {
+        res.status(200).json(actions);
+      }
+    })
+    .catch(err => {
+      console.log('Getting all actions', err);
+      res
+        .status(500)
+        .json({ error: 'Error occurred while getting all actions.' });
+    });
+});
+
+// GET /api/projects/:project_id/actions/:id
+// get(id)
 router.get(
   '/:project_id/actions/:id',
   validateProjectId,
