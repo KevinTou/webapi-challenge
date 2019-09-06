@@ -8,8 +8,7 @@ const server = express();
 server.use(express.json());
 
 // router
-server.use('/api/projects', projectsRouter);
-// server.use('/api/actions', actionsRouter);
+server.use('/api/projects', projectsRouter, actionsRouter);
 
 server.get('/', (req, res) => {
   res.send('Server is up and running!');
