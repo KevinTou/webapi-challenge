@@ -1,0 +1,20 @@
+.app-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.actions-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding: 2rem;
+}
